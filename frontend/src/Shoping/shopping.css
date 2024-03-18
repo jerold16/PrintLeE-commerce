@@ -1,0 +1,44 @@
+.fadein{
+    animation: fadeinanimation 4s ease-in-out;  
+}
+@keyframes fadeinanimation {
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }   
+}
+.pagination{
+    list-style: none;
+    text-decoration: none;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5rem;
+    gap: 10px;
+    margin-top: 5rem;
+}
+.pagination .page-num{
+    padding: 8px 15px;
+    cursor: pointer;
+    border-radius: 3px;
+    font-weight: 400;
+    text-decoration: none;
+    color: blue;
+    font-weight: 200;
+    /* transition: 1s; */
+    border-radius: 20px;
+    /* background-color: rgb(109,40,217); */
+}
+.pagination .page-num:hover{
+    background-color: blue;
+    color: white;
+    transition: 0.8s;
+
+}
+.pagination .active{
+    background-color: blue;
+    color: white;
+}

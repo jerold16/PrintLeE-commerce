@@ -1,0 +1,29 @@
+{
+  "name": "printle",
+  "version": "1.0.0",
+  "description": "Backend for the PrintLe",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node src/index.mjs",
+    "startdev": "nodemon src/index.mjs",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jerold",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.3",
+    "express-session": "^1.18.0",
+    "express-validator": "^7.0.1",
+    "fs": "^0.0.1-security",
+    "mongoose": "^8.2.1",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.12",
+    "path": "^0.12.7"
+  },
+  "type": "module",
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}

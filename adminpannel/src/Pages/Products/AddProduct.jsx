@@ -16,8 +16,8 @@ const AddProduct = () => {
     vatriety:"",
     brand:"",
     modelName:"",
-    mainImage:"",
-    pictures:""
+    mainImage:null,
+    pictures:null
   })
   const handleChanges=(e)=>{
     let {value,name}=e.target 
@@ -35,6 +35,13 @@ const AddProduct = () => {
     }
     else{
       document.getElementById('mainimageerror').innerHTML=""
+    
+    }
+    if(product.pictures==null){
+      document.getElementById('suberror').innerHTML="* upload the image"
+    }
+    else{
+      document.getElementById('suberror').innerHTML=""
     
     }
     if(product.productName==""){  
@@ -61,7 +68,8 @@ const AddProduct = () => {
   }
   let postvalue=(e)=>{
     e.preventDefault()
-    const formData=new FormData()
+    if(product.productName!=""&&product.price!=0&&product.quantity!=0&&product.mainImage!=null&&product.pictures!=null){
+      const formData=new FormData()
     formData.append('adminId',admin._id)
     //append mainimage
     for (let i = 0; i < product.mainImage.length; i++) {
@@ -75,9 +83,8 @@ const AddProduct = () => {
       if(key!='mainImage'&&key!='pictures')
        formData.append(key,product[key])
     }
-    console.log(formData);
-    if(product.productName!=""&&product.price!=0&&product.quantity!=0&&product.mainImage!=null){
-      document.getElementById('producterror').innerHTML=""
+    console.log(product.mainImage);
+    document.getElementById('producterror').innerHTML=""
       document.getElementById('priceerror').innerHTML=""
       document.getElementById('quantityerror').innerHTML=""
       document.getElementById('mainimageerror').innerHTML=""
@@ -158,7 +165,7 @@ const AddProduct = () => {
             <input name='mainImage' onChange={handleChanges} type="file" placeholder='Enter the Product name ' style={{backgroundColor:"#f6f6f6"}} className='p-3 block w-full my-2 px-3 border-0  rounded outline-none' />
           </div>
           <div className='w-[400px] '>
-            Sub Images
+            Sub Images <span id='suberror' className='text-red-600' >*</span>
             <input name='pictures' onChange={handleChanges} type="file" multiple placeholder='Enter the Product name ' style={{backgroundColor:"#f6f6f6"}} className='p-3 block w-full my-2 px-3 border-0  rounded outline-none' />
           </div>
         </article>

@@ -7,7 +7,7 @@ const Dashboard = () => {
   return (
     <div>
         <NavbarCom/>
-       
+        
     </div>
   )
 }

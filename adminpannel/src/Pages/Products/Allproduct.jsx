@@ -14,6 +14,15 @@ const Allproduct = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  let deleteProduct=(id)=>{
+    axios.delete(`${hostName}/api/product/${id}`).then((response)=>{
+      console.log(response.data);
+      alert('deleted successfull')
+      window.location.reload();
+    }).catch((error)=>{
+      console.log(error);
+    })
+  }
   return (
     <div>
       {allProductDb !== undefined && apiCalling ? (
@@ -39,26 +48,27 @@ const Allproduct = () => {
             Add Product
           </button>
           {/* Product details */}
-          <div className="table-responsive mx-auto border-1 container my-4 py-2 ">
-            <table className="table table-striped">
+          <div className="table-responsive w-full mx-auto border-1 container my-4 py-2 ">
+            <table className=" w-full table-striped">
               <tr>
                 <th className="text-center py-2">Product Name </th>
                 <th className="text-center">Product Id</th>
                 <th className="text-center">Price</th>
                 <th className="text-center">Quantity</th>
                 <th className="text-center">Category</th>
-                <th className="text-center">Action</th>
+                <th className="text-center min-w-[200px] ">Action</th>
               </tr>
 
               {allProductDb.map((x,index) => {
                 return (
-                  <tr className={`items-center w-full justify-between p-2 m-0  ${index % 2 == 0 ? "bg-slate-50" : "bg-slate-100"}`}>
-                    <td className="text-center">{x.productName} </td>
-                    <td  className="text-center">{x._id}</td>
-                    <td className="text-center">{x.price}</td>
-                    <td className="text-center">{x.quantity}</td>
-                    <td className="text-center">{x.category}</td>
-                    <td className="text-center"></td>
+                  <tr className={`items-center w-full justify-between m-0  ${index % 2 == 0 ? "bg-slate-50" : "bg-slate-100"}`}>
+                    <td className="text-center"><input value={x.productName} className="outline-none bg-transparent"/></td>
+                    <td  className="text-center"> {x._id} </td>
+                    <td className="text-center"><input type="number" className="outline-none w-20 removearrow text-center bg-transparent" value= {x.price} /></td>
+                    <td className="text-center"><input type="number" className="outline-none w-20 removearrow text-center bg-transparent" value= {x.quantity} /></td>
+                    <td className="text-center"> {x.category} </td>
+                    <td className="text-center"><button className="p-2 px-3 bg-slate-400 rounded">Edit</button>
+                    <button onClick={()=>deleteProduct(x._id)} className="p-2 px-3 bg-red-400 rounded mx-2">Delete</button> </td>
                   </tr>
                 );
               })}

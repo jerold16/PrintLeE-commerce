@@ -117,6 +117,19 @@ productRouter.put('/api/product', multiupload, imagePathArray, async (request, r
         response.sendStatus(400)
     }
 })
+//delete a product
+productRouter.delete(`/api/product/:id`,async(request,response)=>{
+    const {params:{id}}=request
+    try{
+      const deleted=await productModel.findByIdAndDelete(id)
+      if(deleted)
+       return response.send({message:"Deleted"})
+      return response.status(404).send({message:"Id not found"})
+    }
+    catch(error){
+         return response.sendStatus(400)
+    }
+})
 
 
 //delete a image in the product

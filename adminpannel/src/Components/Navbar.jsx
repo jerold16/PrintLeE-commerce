@@ -38,7 +38,7 @@ const NavbarCom = () => {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  <button  className=' p-3 rounded hover:bg-slate-100  d-flex items-center gap-2' 
+                  <button onClick={()=>navigate('/')}  className=' p-3 rounded hover:bg-slate-100  d-flex items-center gap-2' 
                   href="#action1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
   <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5"/>
 </svg> Dashboard</button>
@@ -52,10 +52,9 @@ const NavbarCom = () => {
                     <div className={`${showSubNav? " d-block w-full":"d-none"}  `}>
                         <button onClick={()=>navigate('/product/')} className='bg-slate-50 w-full p-3  text-start hover:bg-slate-100 '>All Products</button>
                         <button onClick={()=>navigate('/product/addproduct')} className='bg-slate-50 w-full p-3 text-start hover:bg-slate-100 '>Create Product</button>
-                        <button className='bg-slate-50 w-full p-3 text-start hover:bg-slate-100 '>Create Category</button>
-                        <button className='bg-slate-50 w-full p-3 text-start hover:bg-slate-100 '>Create Brand</button>
+                        {/* <button onClick={()=>navigate('/createCategory')} className='bg-slate-50 w-full p-3 text-start hover:bg-slate-100 '>Create Category</button>
+                        <button onClick={()=>navigate('/createBrand')} className='bg-slate-50 w-full p-3 text-start hover:bg-slate-100 '>Create Brand</button> */}
                     </div>
-
                     <button  
                   className={`d-flex hover:bg-slate-100  items-center rounded gap-2 p-3 `}  
                   href="#action1"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart" viewBox="0 0 16 16">

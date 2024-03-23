@@ -1,27 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useContext, useEffect, useMemo, useState } from 'react'
 import ReactPaginate from 'react-paginate'
 import ProductCard from '../Component/ProductCard'
+import { Storage } from '../Context/StateStore'
+import Loading from '../Component/Loading'
 
-const Product = () => {
-    let arrydata=[
-        {
-            name:"Phone case",
-            img:"../Assest/badge.png"
-        },
-        {
-            name:"Phone case",
-            img:"../Assest/badge.png"
-        },
-        {
-            name:"Phone case",
-            img:"../Assest/badge.png"
-        },
-        {
-            name:"Phone case",
-            img:"../Assest/badge.png"
-        },
-    ]
-    let data=[...arrydata,...arrydata,...arrydata,...arrydata,...arrydata,...arrydata,...arrydata,...arrydata,...arrydata]
+const Product = (props) => {
+  let {products}=props
+    
+    let data=products!=undefined? [...products]:[]
     const [itemOffset, setItemOffset] = useState(0);
     const [currentItems,setcurrentItems]=useState([]);
     const [pageCount,setPageCount] =useState(0);
@@ -34,7 +20,6 @@ const Product = () => {
     useEffect(()=>{
         window.scrollTo(0,0);
     },[])
-    
     const handlePageClick = (event) => {
       const newOffset = (event.selected * itemsPerPage) % data.length;
       setItemOffset(newOffset);
@@ -42,7 +27,10 @@ const Product = () => {
     };   
     
   return (
-    <div>
+    <div className='w-full'>
+      {
+        products!=null?<>
+       
         <div className='flex items-center min-h-[15vh] justify-between px-3'>
             <p className='poppins mb-0 ms-3' >Showing {itemOffset+1}-{itemOffset+currentItems.length} of {data.length} results</p>
             <select name="sorting" className=' border-0 bg-slate-50 outline-none p-3 w-[180px]  rounded-full ' id="">
@@ -53,7 +41,7 @@ const Product = () => {
 
             </select>
         </div>
-        <div id='productSection' className='flex  flex-wrap gap-3 mb-5 justify-between'>
+        <div id='productSection' className='flex flex-wrap gap-3 mb-5 justify-between'>
         {
             currentItems.map((value,index)=>{
                 return(
@@ -75,7 +63,8 @@ const Product = () => {
           previousLinkClassName='page-num'
           nextLinkClassName='page-num'
           activeLinkClassName='active'
-        />
+        /> </> : <Loading/>
+      }
     </div>
   )
 }

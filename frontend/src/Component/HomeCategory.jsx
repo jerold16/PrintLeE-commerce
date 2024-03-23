@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Slider from "react-slick";
 import { categories } from "./Data";
+import { Storage } from "../Context/StateStore";
 
 const HomeCategory = () => {
+  const {Allcaetgory}=useContext(Storage)
  
   var settings = {
     dots: true,
@@ -44,8 +46,10 @@ const HomeCategory = () => {
   };
   
   return (
-    <div className="">
-    <div className="flex flex-wrap gap-3 justify-around my-10">
+    <div className="flex flex-col min-h-[90vh] ">
+      {
+        Allcaetgory!=undefined ? <>  
+    <div className="flex  flex-wrap gap-3 justify-around my-auto">
         <div className="flex  items-center poppins fw-semibold gap-2">
         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-truck" viewBox="0 0 16 16">
   <path d="M0 3.5A1.5 1.5 0 0 1 1.5 2h9A1.5 1.5 0 0 1 12 3.5V5h1.02a1.5 1.5 0 0 1 1.17.563l1.481 1.85a1.5 1.5 0 0 1 .329.938V10.5a1.5 1.5 0 0 1-1.5 1.5H14a2 2 0 1 1-4 0H5a2 2 0 1 1-3.998-.085A1.5 1.5 0 0 1 0 10.5zm1.294 7.456A2 2 0 0 1 4.732 11h5.536a2 2 0 0 1 .732-.732V3.5a.5.5 0 0 0-.5-.5h-9a.5.5 0 0 0-.5.5v7a.5.5 0 0 0 .294.456M12 10a2 2 0 0 1 1.732 1h.768a.5.5 0 0 0 .5-.5V8.35a.5.5 0 0 0-.11-.312l-1.48-1.85A.5.5 0 0 0 13.02 6H12zm-9 1a1 1 0 1 0 0 2 1 1 0 0 0 0-2m9 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2"/>
@@ -79,12 +83,12 @@ const HomeCategory = () => {
     
     <div className="container px-5">
       <Slider {...settings} className=" my-5">
-        {categories.map((data) => {          
+        {Allcaetgory.map((data) => {          
           return (
             <div style={{backgroundColor:'rgb(218,52,246)'}}
-            className="cursor-pointer rounded-3xl relative
+            className="cursor-pointer w-100   rounded-3xl relative
              h-[20rem] hover:scale-105 shadow-xl transition duration-500 border-1 overflow-hidden  flex ">
-              <img src={data.img} className="w-100 h-100  object-fit-cover rounded-3xl" alt="image" />
+              <img src={data.image} className="w-100 h-[20rem]  object-contain rounded-3xl" alt="image" />
             <div className="absolute  bg-transparent flex flex-col  justify-end p-6 top-0 w-100 h-100 ">
              
               <button className="px-4 w-fit p-3 bg-violet-500 text-slate-50 rounded-full">Explore more </button>
@@ -97,6 +101,8 @@ const HomeCategory = () => {
 
     </div>
     </div>
+    </> : ""
+      }
     </div>
   );
 };

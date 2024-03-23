@@ -1,8 +1,8 @@
 import { Router, request, response } from "express";
 import { addressModel, userModel } from "../ModelSchema/userModel.mjs";
 import { comparePassword, hashpassword } from "../utils/hashpassword.mjs";
-import { successMailSender } from "../utils/emailsender.mjs";
-import { currentTime } from "../utils/middleware.mjs";
+import { otpSender, successMailSender } from "../utils/emailsender.mjs";
+import { currentTime, optGenerator } from "../utils/middleware.mjs";
 import { adminModel } from "../ModelSchema/adminModel.mjs";
 
 export const userRouter=Router()
@@ -45,6 +45,24 @@ userRouter.post('/api/user',async (request,response)=>{
         }
     })
 })
+//User otp check
+userRouter.post(`/api/userVerify`,(request,response)=>{
+    const {body}=request
+    const otp=optGenerator()
+    const maildata={
+             name:body.username,
+             otp:otp,
+             email:body.email,
+             subject:`User registeration confirmation ${currentTime()}`,
+             text:`Dear ${body.username}\n
+             This is the User registeration confirmation by the PrintLe. \n The OTP is ${otp}`
+    }
+    otpSender(maildata)
+    response.send({message:"Otp has been sended to your email",otp:otp})
+
+})
+
+
 //Get all the user 
 userRouter.get('/api/alluser',async (request,response)=>{
     const alluser =await userModel.find().populate('address')
@@ -56,7 +74,7 @@ userRouter.get('/api/alluser',async (request,response)=>{
 
 
 userRouter.get('/api/user',async (request,response)=>{
-    console.log("ENtered get method");
+    console.log("Entered get method");
     const {query:{ emailNum,password}}=request
     if(emailNum&&password){
         console.log("Entered in the condition");
@@ -109,7 +127,6 @@ userRouter.get('/api/userEmail',async(request,response)=>{
     else 
     return response.sendStatus(404)
 })
-
 
 //Delete the user using the id
 //http://localhost:3020/api/user/65eeb044603c8c18e28e5748

@@ -9,8 +9,10 @@ import './Shoping/shopping.css'
 import ProductPage from './Shoping/ProductPage';
 import DesignerPage from './DesingEdit/DesignerPage';
 import Myaccount from './Component/Myaccount';
-import AdminLogin from './Admin/Pages/AdminLogin';
-import Adminpannel from './Admin/Pages/Adminpannel';
+import AdminLogin from './User/Login';
+import WishList from './Shoping/WishList';
+import Cart from './Shoping/Cart';
+import Brands from './Shoping/Brands';
 
 // Host name
 export const hostname="http://localhost:3020"
@@ -33,8 +35,9 @@ function App() {
         <Route path='/shop/:name' element={<ProductPage />}/>
         <Route path='/design/:type' element={<DesignerPage />}/>
         <Route path='/myaccount' element={<Myaccount />}/>
-        {/* Admin pannel sub page */}
-        <Route path='/admin/*' element={<Adminpannel/>}/>
+        <Route path='/wishlist' element={<WishList/>}/>
+        <Route path='/cartlist' element={<Cart/>}/>
+        <Route path='/category/:category' element={<Brands/>}/>
       </Routes>
       </Suspense>
   </BrowserRouter>

@@ -32,12 +32,10 @@ const VerificationEmailModel = (props) => {
       if(otp==enteredOTP){
         axios.get(`${hostName}/api/userEmail?email=${email}&type=${who}`)
         .then((response)=>{
-          if(who=='user'){
-            sessionStorage.setItem('user',response.data)
-            navigate('/')
-          }
-          sessionStorage.setItem('admin',response.data)
-          navigate('/admin/dashboard')
+          
+          sessionStorage.setItem('admin',JSON.stringify(response.data))
+          navigate('/')
+          window.location.reload()
          
         })
         .catch((err)=>{

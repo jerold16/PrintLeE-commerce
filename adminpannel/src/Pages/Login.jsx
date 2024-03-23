@@ -32,7 +32,7 @@ const AdminLogin = () => {
         e.preventDefault()
         axios.get(`${hostName}/api/admin?emailNum=${email}&password=${password}`)
         .then((response)=>{
-            alert("ookok")
+            alert("Admin login Successfull")
             sessionStorage.setItem('admin',JSON.stringify(response.data))
             window.location.reload()
             navigate('/')
@@ -64,7 +64,7 @@ const AdminLogin = () => {
          {
             axios.post(`${hostName}/api/admin`,adminSignup).then((response)=>{
                 alert("Account has been registered")
-                sessionStorage.setItem('admin',response.data)
+                sessionStorage.setItem('admin',JSON.stringify(response.data))
                 console.log(response.data);
                 navigate('/')
             }).catch((err)=>{

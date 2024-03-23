@@ -43,7 +43,6 @@ const productSchema=new mongoose.Schema({
     },
     mainImage:{
         type:mongoose.Schema.Types.String,
-        required:true
     },
     imageUrl:[
        
@@ -63,6 +62,9 @@ const brandSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.String
     },
     image:{
+        type:mongoose.Schema.Types.String
+    },
+    category:{
         type:mongoose.Schema.Types.String
     }
 })

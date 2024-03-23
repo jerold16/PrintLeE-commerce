@@ -2,10 +2,11 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import { Modal } from 'react-bootstrap'
 import { useNavigate } from 'react-router'
+import { hostname } from '../App'
 
 const VerificationEmailModel = (props) => {
   let navigate=useNavigate()
-    let {show,who}=props;
+    let {show,who,onHide}=props;
     let [otp,setotp]=useState() 
     let [enteredOTP,setEnterOTP]=useState()
     let [otpshow,setotpshow]=useState(false)  
@@ -13,7 +14,7 @@ const VerificationEmailModel = (props) => {
     let getOtp=(e)=>{
         e.preventDefault()
         
-        axios.post(`http://localhost:3020/api/emailverify?email=${email}`)
+        axios.post(`${hostname}/api/emailverify?email=${email}&type=${who}`)
         .then((response)=>{
             console.log(response.data);
             setotp(response.data)
@@ -29,15 +30,12 @@ const VerificationEmailModel = (props) => {
     }
     let Login=()=>{
       if(otp==enteredOTP){
-        axios.get(`http://localhost:3020/api/userEmail?email=${email}&type=${who}`)
+        axios.get(`${hostname}/api/userEmail?email=${email}&type=${who}`)
         .then((response)=>{
           if(who=='user'){
-            sessionStorage.setItem('user',response.data)
-            navigate('/')
-          }
-          sessionStorage.setItem('admin',response.data)
-          navigate('/admin/dashboard')
-         
+            sessionStorage.setItem('user',JSON.stringify(response.data._id))
+            setotpshow(false)
+          } 
         })
         .catch((err)=>{
           console.log(err);

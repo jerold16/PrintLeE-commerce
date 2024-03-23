@@ -18,7 +18,7 @@ const FilterBar = () => {
         <div className='shadow poppins my-5 bg-slate-50 m-2 rounded-3xl e w-[20rem] p-4'>
         <h5>Search</h5>
         <div className=' p-2 px-3 my-1 items-center w-fit rounded-full border-1 flex outline-none focus-within:border-violet-700'>
-            <input className='outline-none border-0' type="text" />
+            <input className='outline-none border-0 bg-transparent' type="text" />
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
   <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
 </svg>

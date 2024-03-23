@@ -1,12 +1,14 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
 const Footer = () => {
+  let navigate=useNavigate()
   return (
     <div className="p-5 bg-slate-100">
       <Row className="">
         <Col sm={6} lg={3}>
-          <img src="" alt="logo" />
+          <img src={require('../Assest/DarkPrintLe.png')}  width={170} onClick={()=>navigate('/')} className="my-2 cursor-pointer"  alt="logo" />
           <p>
             2972 Westheimer Rd. Santa Ana, <br />
             Illions 852451 <br />
@@ -111,7 +113,7 @@ const Footer = () => {
           
         </Col>
         <Col lg={4} className="h-fit flex justify-end ">
-          <a href="#home" className="mb-0 text-decoration-none">Back to top </a>          
+          <a href="#" className="mb-0 text-decoration-none">Back to top </a>          
           </Col>
       </Row>
     </div>

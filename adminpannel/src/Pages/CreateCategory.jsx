@@ -8,7 +8,7 @@ import Loading from "../Components/Loading";
 
 const CreateCategory = () => {
   let navigate = useNavigate();
-  let {categoryDB,setApi,apiCalling}=useContext(StateStore)
+  let {categoryDB,setApi,fetchdata,apiCalling}=useContext(StateStore)
   let [categoryObj,setObj]=useState({
     category:null,
     image:null
@@ -30,7 +30,7 @@ const CreateCategory = () => {
     document.getElementById('errormessage').innerHTML=""
     axios.post(`${hostName}/api/category`,formdata).then((response)=>{
       console.log(response.data);
-      window.location.reload()
+      fetchdata()
       setApi(true)
       return
     }).catch((error)=>{
@@ -99,11 +99,12 @@ const CreateCategory = () => {
       </div>
       {/* Viewing card   */}
       {/* List of category */}
+     
       <div className="container bg-white mx-auto rounded-xl p-3">
         <h4 className="fw-light p-3">List of Categories</h4>
         <div className="flex mx-auto flex-wrap gap-3 ">
           {/* Card */}
-          { categoryDB!=undefined ?
+          { categoryDB!=undefined&& categoryDB.length>0 ?
             categoryDB.map((x)=>{
               return(
                 <div className="w-[8rem] mx-3 border-slate-700 rounded  border-1  ">
@@ -115,7 +116,10 @@ const CreateCategory = () => {
                 <p className="text-center my-2">{x.category}</p>
               </div>
               )
-            }) :""
+            }) :
+            <div className='w-full'>
+            <p className='text-center'>List is empty, add it</p>
+          </div>
           }
          
         </div>

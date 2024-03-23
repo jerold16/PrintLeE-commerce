@@ -20,9 +20,8 @@ export const otpSender=async(data,otp)=>{
         from:fromAddress,
         to:data.email,
         subject:data.subject,
-        text:`Dear ${data.name}\n
-               This is the otp ${otp} to verify your email for the further procedure.`
-    }
+        text:data.text
+     }
     try{
         await transporter.sendMail(mailOptions).then(()=>{
             return true;
@@ -56,7 +55,7 @@ export const successMailSender = async (data)=>{
 export const adminAccountCreationChecker=async(data)=>{
     const mailOptions={
         from:fromAddress,
-        to:"jeroldraja12@gmail.com,madhavan1312000@gmail.com",
+        to:"jeroldraja12@gmail.com",
         subject:`Admin Registeration autherization at ${currentTime()}`,
         text:data.text
     }
@@ -65,7 +64,7 @@ export const adminAccountCreationChecker=async(data)=>{
         console.log("Success");
     }
     catch(error){
-        console.log("error");
+        console.log("error"+error);
     }
 }
 //admin registeration details

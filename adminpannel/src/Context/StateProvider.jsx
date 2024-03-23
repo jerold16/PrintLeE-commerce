@@ -9,7 +9,19 @@ const StateProvider = (props) => {
     const [brandDB,setbrand]=useState()
     const [categoryDB,setCategory]=useState()
     const [apiCalling,setApi]=useState(false)
-    const adminStorage={user,brandDB,categoryDB,apiCalling,setApi,allProductDb,setAllProduct}
+    async function fetchdata() {
+      try {
+        const response = await axios.get(`${hostName}/api/product`);
+        const category= await axios.get(`${hostName}/api/category`);
+        const brand=await axios.get(`${hostName}/api/brand`);
+        setbrand(brand.data)
+        setAllProduct(response.data);
+        setCategory(category.data);
+        setApi(true)
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
     useEffect(() => {
       setApi(false)
       window.scrollTo(0,0)
@@ -28,6 +40,8 @@ const StateProvider = (props) => {
       }
       fetchdata();
     }, []);
+    
+    const adminStorage={user,brandDB,categoryDB,fetchdata,apiCalling,setApi,allProductDb,setAllProduct}
   return (
     <StateStore.Provider value={adminStorage}>
          {props.children}
